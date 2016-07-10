@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CALT</title>
+
+		<meta name="description" content="A Simple Attempt on Computer Adaptive Language Testing">
+		<meta name="author" content="Shaojie Liang, Lan Yang, Maoyin Sun">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+<style>
+.reveal {
+    background: #f7fbfc;
+    background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
+    background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background-color: #f7fbfc
+}
+</style>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+<!--------------------------------------------------------------->
+<div class="slides">
+    <section class="" data-id="e844121c78a930f1f62cd3f39280a4f8">
+        <h1>CALT</h1>
+<div>
+        <span>A Simple Attempt on</span>
+        </div>
+<div>Computer Adaptive Language Testing</div>
+    </section>
+    <section class="" data-id="5493a127558919492a02817e099f1854">
+        <h2>Group 5</h2>
+<div>
+<div>Shaojie Liang</div>
+<div>Lan Yang</div>
+<div>Maoyin Sun</div>
+</div>
+    </section>
+    <section class="stack" data-id="9d9f2f2593ded8b898285dc1be9a50c1">
+        <section class="" data-id="701e58dc3086f925880d217f3d27203e">
+            <h2>Introduction</h2>
+            <div><img src="img/pblt.jpg" alt="pblt" height="250px"> -&gt; <img src="img/calt.png" alt="calt" height="250px"></div>
+        </section>
+        <section class="" data-id="c1751378201241ca2efb374322985852">
+            <h2>History</h2>
+<div>
+    <br>
+</div>
+<div>
+<div data-fragment-index="0" class="fragment">
+<span>Traditional Paper-and-pencil Based Language Testing(PBLT)</span>
+<br>
+</div>
+<div data-fragment-index="1" class="fragment">
+<div>↓</div>
+<span>Computer Based Language Testing(CBLT)</span>
+<br>
+</div>
+<div data-fragment-index="2" class="fragment">
+<div>↓</div>
+<span>Computer Adaptive Language testing(CALT).</span>
+<br>
+</div>
+</div>
+
+
+
+
+</section>
+        </section>
+        <section class="stack" data-id="a025c12c38ae3a5df17e699e9887208a">
+            <section class="" data-id="6314c7d1dc77d13d1f2d8ddbedf02c3b">
+                <h2>Assumptions and Principles</h2>
+<div>
+    <p class="MsoNormal" style="text-indent: 24pt;">
+        </p>
+<ol>
+            <li class="fragment" data-fragment-index="0">
+                <span style="text-indent: 24pt; text-align: center;">Statistically if one has a vocabulary of <i>x</i>, means he/she knows first <i>x</i> words by the frequency
+order.&nbsp;</span>
+                <br>
+            </li>
+            <li class="fragment" data-fragment-index="1">
+                <span style="text-indent: -18pt; text-align: center;">Each examinee answers truthfully.&nbsp;</span>
+                <br>
+            </li>
+        </ol>
+    <p>
+            </p>
+    <p class="MsoNormal" style="text-indent: 24pt;">
+        <span lang="EN-US">
+        </span>
+    </p>
+</div>
+</section>
+            <section class="" data-id="5371ce152d896a6356ed941b1c1199af">
+                <h2>Data sources</h2>
+<div>Extracted from all subtitle file from&nbsp;<b>SUBTLEXus</b>.&nbsp;</div>
+            </section>
+            <section class="" data-id="f13091d933d802bff592a31f70427233">
+                <h2>Query method</h2>
+<div>Based on recursive binary search</div>
+            </section>
+            <section class="" data-id="e83aa0e675667244d61c43f413ea2696">
+                <h2>Convergency Investigation<br>
+</h2>
+<div>Calculated with&nbsp;variance and depth of queries</div>
+            </section>
+            <section class="" data-id="fc844bfb476e5629ce58998468e5e166" data-background-color="rgba( 22, 213, 75, 0.6 )">
+                <img src="img/chart.png" alt="chart">
+                <h2>It works.&nbsp;</h2>
+            </section>
+            <section class="" data-id="b2eedb7733548c96d98a639ad453e826" data-background-color="rgba( 255, 122, 0, 0.6 )">
+                <h2>Have a try!&nbsp;</h2>
+                <img src="img/play.png">
+            </section>
+            <section class="" data-id="f746c1d140d89906e38591f3bbdbe828">
+                <a href="../" target="_blank">
+                    <img src="img/qr.png" width="50%" alt="qr-code">
+                </a>
+                <h2>Playground</h2>
+            <div>
+                <br>
+            </div>
+        </section>
+    </section>
+    <section class="stack" data-id="0d42d4f2eaee5c2b2fc9fc76c156ad98">
+        <section class="" data-id="8635164371125739a1f5e85ae6bee367">
+            <h2>Validity Analysis</h2>
+        </section>
+        <section class="" data-id="832a2fc19944f2fb339c59f66b7370d2">
+            <h2>Face Validity</h2>
+<div>We intended to test a person’s vocabulary,</div>
+<div>and then designed the experiment.&nbsp;<br>
+</div>
+        </section>
+        <section class="" data-id="908e20d58c7b1ac5b867e8419d10c104">
+            <h2>Content Validity</h2>
+<div>
+    <br>
+</div>
+<div class="fragment" data-fragment-index="0">
+    <div>The lexical library in this experiment includes all the frequency of words from 0 -100000, covering the full range of content.</div>
+    <div>
+        <br>
+    </div>
+    <div>It has two-way detailed tables,&nbsp;</div>
+    <div>and the number of tests in each layer were determined.&nbsp;</div>
+</div>
+<div>
+    <br>
+</div>
+<div class="fragment" data-fragment-index="1">
+    <b>CALT has good content validity.</b>
+    <br>
+</div>
+</section>
+            <section class="" data-id="09d470dcf972cb1427e572a28a4f0473">
+                <h2>Concurrent Validity<br>and Predict Validity</h2>
+<div>
+    <br>
+</div>
+<div>
+    <div>
+        <ul>
+            <li class="fragment" data-fragment-index="0">
+                <span style="text-align: center;">Based on IRT(Item Response Theory)&nbsp;</span>
+                <br>
+            </li>
+            <li class="fragment" data-fragment-index="1">
+                <span style="text-align: center;">Flexibility in the management of the test&nbsp;</span>
+                <br>
+            </li>
+            <li class="fragment" data-fragment-index="2">
+                <span style="text-align: center;">Prompt scores&nbsp;</span>
+            </li>
+            <li class="fragment" data-fragment-index="3">
+                <span style="text-align: center;">At any time examinees gets similar results with little gaps.&nbsp;</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div>
+    <br>
+</div>
+<div class="fragment" data-fragment-index="4">
+<b>
+    CALT has great concurrent validity and predict validity.
+</b>
+</div>
+
+
+
+
+
+
+
+</section>
+<section class="" data-id="6be194e5ad1aeba086d027791916cc15">
+                            <h2>Construct Validity</h2>
+                            <div>
+                                <div>
+                                    <ul>
+                                        <li class="fragment" data-fragment-index="0">
+                                            <span style="text-align: center;">Based a unified reference criterion</span>
+                                            <br>
+                                        </li>
+                                        <li class="fragment" data-fragment-index="1">
+                                            <span style="text-align: center;">A good stability, equivalence and objectivity</span>
+                                            <br>
+                                        </li>
+                                        <li class="fragment" data-fragment-index="2">
+                                            <span style="text-align: center;">All the work is done by the computer itself</span>
+                                            <br>
+                                        </li>
+                                        <li class="fragment" data-fragment-index="3">
+                                            <span style="text-align: center;">High safety and effectiveness.</span>
+                                            <br>
+                                        </li>
+                                        <li class="fragment" data-fragment-index="4">
+                                            <span style="text-align: center;">Question number is large</span>
+                                            <br>
+                                        </li>
+                                        <li class="fragment" data-fragment-index="5">
+                                            <span style="text-align: center;">Topic project is wide enough</span>
+                                            <br>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+            </section>
+            <section class="stack" data-id="764d695f78c86620fb9b6c1f9a5be9da">
+                <section class="" data-id="96a5a6897e0941a363061390a38c59c9" data-background-color="rgba( 200, 50, 30, 0.6 )">
+                    <h2>Shortcomings</h2>
+                </section>
+                <section class="" data-id="a55459dbf143057ec95f35dd98b79277">
+                    <h2>Physical considerations</h2>
+<div>
+                    <div>
+                        <ul>
+<li class="fragment" data-fragment-index="0">
+<span style="text-align: center;">Equipment may not always be available, or in working order, which may have an negative impact on the test taker.</span>
+                        <br>
+</li>
+<li class="fragment" data-fragment-index="1">
+<span style="text-align: center;">Screen capacity is another physical consideration.</span>
+                        <br>
+</li>
+</ul>
+                    </div>
+                </div>
+            </section>
+            <section class="" data-id="4442ca3c7287b92bda2e971e86f702b8">
+                <h2>Performance Considerations</h2>
+<div>
+                <div>
+                    <ul>
+<li class="fragment" data-fragment-index="0">
+<span style="text-align: center;">The presentation of a test on a computer may lead to different results from those that would be obtained if the same test were administered in a paper-and-pencil format.&nbsp;</span>
+                    <br>
+</li>
+<li class="fragment" data-fragment-index="1">
+<span style="text-align: center;">Differences in the degree to which students are familiar with using computers or typewriter keyboards may lead to discrepancies in their performances on computer-assisted or computer-adaptive tests</span>
+                    <br>
+</li>
+<li class="fragment" data-fragment-index="2">
+<span style="text-align: center;">Computer anxiety</span>
+                    <br>
+</li>
+</ul>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="" data-id="db5fe09b1ec2b17f415769b044c428b6">
+        <h2>Conclusion</h2>
+<div style="text-align: justify;" class="fragment" data-fragment-index="0">We can concluded that CALT has good face validity, content validity, concurrent validity and predictive validity. However, for more complex language tests, obviously there will be some disadvantages which may have a negative impact on the test takers.In generally, the advantages outweigh its disadvantages, with the development of computer science, CALT will be a better way of testing than PPLT.&nbsp;<br>
+</div>
+    </section>
+    <section class="" data-id="833111b7e2f87be58667624e6731d659">
+        <h2>Thank you!&nbsp;</h2>
+    </section>
+</div>
+
+<!--------------------------------------------------------------->
+                </div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
