@@ -1,0 +1,10 @@
+CACHE MANIFEST
+CACHE:
+./
+./index.html
+./split.js
+./lz-string.js
+./grips/horizontal.png
+./grips/vertical.png
+NETWORK: 
+*
