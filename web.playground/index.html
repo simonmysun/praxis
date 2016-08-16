@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" manifest="manifest.appcache">
+<html>
+  <head>
+    <title>Editor</title>
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <div id="config"><a href="#" class="btn" id="btn-update">UPDATE</a></div>
+    <div id="wrapper">
+      <div id="viewer" class="split">
+        <div id="viewer-left" class="split split-horizontal">
+          <div id="layout" class="split content">
+            <pre id="layout-editor" class="ace--editor"></pre>
+          </div>
+          <div id="scripts" class="split content">
+            <pre id="scripts-editor" class="ace--editor"></pre>
+          </div>
+        </div>
+        <div id="viewer-right" class="split split-horizontal">  
+          <div id="styles" class="split content">
+            <pre id="styles-editor" class="ace--editor"></pre>
+          </div>
+          <div id="preview" class="split content">
+            <iframe id="preview-iframe"></iframe>
+          </div>
+        </div>
+      </div>
+      <div id="console" class="split content">
+        <div id="output"></div>
+        <div id="input">
+          <pre id="input-editor"></pre>
+        </div>
+      </div>
+    </div>
+    <script src="assets/ace/ace.js"></script>
+    <script src="assets/split.js"></script>
+    <script src="assets/lz-string.js"></script>
+    <script src="assets/scripts.js"></script>
+  </body>
+</html>
