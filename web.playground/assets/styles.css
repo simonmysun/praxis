@@ -116,6 +116,7 @@ body {
 .console-messages {
   width: 100%;
   border-bottom: 1px solid #ddd;
+  white-space: pre;
 }
 
 .console-messages.log {
