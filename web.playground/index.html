@@ -2,8 +2,13 @@
 <html lang="en" manifest="manifest.appcache">
 <html>
   <head>
-    <title>Editor</title>
+    <title>Web Playground</title>
     <link rel="stylesheet" href="assets/styles.css">
+    <script type="text/javascript">
+     if ((window.location.hostname != 'localhost') && (window.location.protocol != "https:")) {
+       window.location.protocol = "https";
+     }
+    </script>
   </head>
   <body>
     <div id="config"><a href="#" class="btn" id="btn-update">UPDATE</a></div>
