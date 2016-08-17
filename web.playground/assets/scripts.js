@@ -1,9 +1,14 @@
+var triggerResize = function () {
+  window.dispatchEvent(new Event('resize'));
+};
+
 Split(['#viewer', '#console'], {
   direction: 'vertical',
   sizes: [85, 15],
   gutterSize: 8,
   cursor: 'row-resize',
-  minSize: 50
+  minSize: 50,
+  onDragEnd: triggerResize
 });
 
 Split(['#viewer-left', '#viewer-right'], {
@@ -11,7 +16,8 @@ Split(['#viewer-left', '#viewer-right'], {
   sizes: [50, 50],
   gutterSize: 8,
   cursor: 'row-resize',
-  minSize: 50
+  minSize: 50,
+  onDragEnd: triggerResize
 });
 
 Split(['#layout', '#scripts'], {
@@ -19,7 +25,8 @@ Split(['#layout', '#scripts'], {
   sizes: [50, 50],
   gutterSize: 8,
   cursor: 'row-resize',
-  minSize: 50
+  minSize: 50,
+  onDragEnd: triggerResize
 });
 
 Split(['#styles', '#preview'], {
@@ -27,7 +34,8 @@ Split(['#styles', '#preview'], {
   sizes: [35, 65],
   gutterSize: 8,
   cursor: 'row-resize',
-  minSize: 50
+  minSize: 50,
+  onDragEnd: triggerResize
 });
 
 var $iframe = document.getElementById('preview-iframe');
@@ -35,6 +43,7 @@ var $iframe = document.getElementById('preview-iframe');
 var layoutEditor = ace.edit("layout-editor");
 layoutEditor.setTheme("ace/theme/chrome");
 layoutEditor.session.setMode("ace/mode/html");
+layoutEditor.setAutoScrollEditorIntoView(true);
 layoutEditor.getSession().on('change', function(e) {
   if(config.manualUpdate) return;
   throttledUpdate();
@@ -43,6 +52,7 @@ layoutEditor.getSession().on('change', function(e) {
 var scriptsEditor = ace.edit("scripts-editor");
 scriptsEditor.setTheme("ace/theme/chrome");
 scriptsEditor.session.setMode("ace/mode/javascript");
+scriptsEditor.setAutoScrollEditorIntoView(true);
 scriptsEditor.getSession().on('change', function(e) {
   if(config.manualUpdate) return;
   throttledUpdate();
@@ -60,7 +70,7 @@ var inputEditor = ace.edit("input-editor");
 inputEditor.setTheme("ace/theme/chrome");
 inputEditor.session.setMode("ace/mode/javascript");
 inputEditor.setAutoScrollEditorIntoView(true);
-inputEditor.setOption("maxLines", 200000);
+inputEditor.setOption("maxLines", Infinity);
 inputEditor.renderer.setShowGutter(false);
 var inputHistory = [];
 if(localStorage.inputHistory) {
