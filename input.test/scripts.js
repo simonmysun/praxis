@@ -40,8 +40,10 @@ var AnimateList = function() {
       el: el,
       x: tmpx,
       y: 1,
+      ng: 0,
       vx: (0.5 - Math.random()) / 5,
       vy: - (0.7 + Math.random() * 0.3) * 2,
+      vng: (0.5 - Math.random()) * 1000,
       ax: 0,
       ay: 2,
       o: 1
@@ -60,6 +62,7 @@ var AnimateList = function() {
       item.y += item.vy * duration;
       item.vx += item.ax * duration;
       item.vy += item.ay * duration;
+      item.ng += item.vng * duration;
       if(item.x > 1 || item.x < 0) {
         item.vx = - item.vx;
       }
@@ -71,6 +74,7 @@ var AnimateList = function() {
       item.o = Math.max(0, item.o - 0.8 * duration);
       item.el.style.left = item.x * 100 + '%';
       item.el.style.top = item.y * 100 + '%';
+      item.el.style.transform = 'rotate(' + item.ng + 'deg)';
       item.el.style.opacity = item.o;
     });
   };
