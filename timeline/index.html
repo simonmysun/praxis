@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fahrradtour nach Chemnitz Ost</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./lib/leaflet.css" />
+    <link rel="stylesheet" href="./lib/MarkerCluster.css" />
+    <link rel="stylesheet" href="./lib/leaflet.Photo.css" />
+    <style>
+     body {
+       padding: 0;
+       margin: 0;
+     }
+     html, body {
+       height: 100%;
+       width: 100%;
+     }
+     #map {
+       height: calc(100% - 150px);
+       width: 100%;
+     }
+     #graph {
+       position:fixed;
+       bottom: 0;
+       width:100%;
+       height:150px;
+     }
+
+     /* photo/video popup */
+     .leaflet-popup-photo a.leaflet-popup-close-button {
+       top: -13px;
+       right: -13px;
+       background-color: #fff;
+       padding: 5px;
+       border-radius: 12px;
+       width: 15px;
+       height: 15px;
+       box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+       color: #555;	
+     }
+     .leaflet-popup-photo a.leaflet-popup-close-button:hover {
+       color: #333;
+       background-color: #eee;
+     }
+     .leaflet-popup-photo .leaflet-popup-content-wrapper { 
+       padding: 6px;
+       border-radius: 4px;
+     }
+     .leaflet-popup-photo .leaflet-popup-content { 
+       margin: 0;
+     }
+     .leaflet-popup-photo .leaflet-popup-tip {
+       background: white;
+     }
+     .leaflet-popup-photo img, 
+     .leaflet-popup-photo video {
+       display: block;
+       width: 100%;
+     }
+     .leaflet-popup-photo p {
+       margin: 5px 0 0 0;
+     }
+     .leaflet-popup-content {
+       width:auto ! important;
+     }
+     .leaflet-popup-content-wrapper {
+       padding: 0 ! important;
+       border-radius: 0 ! important;
+     }
+
+     .axis path,
+     .axis line {
+       fill: none;
+       stroke: #000;
+       shape-rendering: crispEdges;
+     }
+     
+     .x.axis path {
+       display: none;
+     }
+     
+     .line {
+       fill: none;
+       stroke: steelblue;
+       stroke-width: 1.5px;
+     }
+    </style>
+    <script type="text/javascript">
+     if ((window.location.hostname != 'localhost') && (window.location.protocol != "https:")) {
+       window.location.protocol = "https";
+     }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="graph"></div>
+    
+    <script src="./lib/plotly-latest.min.js"></script>
+    <script src="./lib/leaflet.js"></script>
+    <script src="./lib/leaflet.markercluster.js"></script>	
+    <script src="./lib/leaflet.Photo.js"></script>	
+
+    <script>
+     var d3 = Plotly.d3;
+     var map = L.map('map').setView([50.80419899467614, 12.970733642578125], 12);
+     mapLink = 
+     '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+     L.tileLayer(
+       'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         attribution: '&copy; ' + mapLink + ' Contributors',
+         maxZoom: 18,
+       }).addTo(map);
+
+     // Add an SVG element to Leaflet’s overlay pane
+     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+	 g = svg.append("g").attr("class", "leaflet-zoom-hide");
+     
+     d3.json("data.geojson", function(geoShape) {
+       
+       //  create a d3.geo.path to convert GeoJSON to SVG
+       var transform = d3.geo.transform({point: projectPoint}),
+           path = d3.geo.path().projection(transform);
+       
+       // create path elements for each of the features
+       d3_features = g.selectAll("path")
+		      .data(geoShape.features)
+		      .enter().append("path");
+
+       map.on("viewreset", reset);
+
+       reset();
+
+       // fit the SVG element to leaflet's map layer
+       function reset() {
+         
+         bounds = path.bounds(geoShape);
+
+         var topLeft = bounds[0],
+	     bottomRight = bounds[1];
+
+	 svg .attr("width", bottomRight[0] - topLeft[0])
+	     .attr("height", bottomRight[1] - topLeft[1])
+	     .style("left", topLeft[0] + "px")
+	     .style("top", topLeft[1] + "px");
+
+	 g .attr("transform", "translate(" + -topLeft[0] + "," 
+			    + -topLeft[1] + ")");
+
+	 // initialize the path data	
+	 d3_features.attr("d", path)
+		    .style("fill-opacity", 0)
+                    .attr("stroke", "#77aaff")
+                    .attr("stroke-width", 5)
+                    .attr("stroke-opacity", 0.7);
+       }
+       
+       // Use Leaflet to implement a D3 geometric transformation.
+       function projectPoint(x, y) {
+	 var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+	 this.stream.point(point.x, point.y);
+       }
+
+       drawGraph(geoShape);
+     });
+
+     var photoLayer = L.photo.cluster().on('click', function (evt) {
+       var photo = evt.layer.photo,
+           //	   template = '<a href="{url}" target="_blank"><img src="{url}"/></a><p>{caption}</p>';
+           template = '<iframe src="{url}" width="500" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>';
+       evt.layer.bindPopup(L.Util.template(template, photo), {
+	 className: 'leaflet-popup-photo',
+	 minWidth: 500
+       }).openPopup();
+     });
+
+     d3.json("photos.json", function(data) {
+       photoLayer.add(data.photos).addTo(map);
+     });
+
+     if (typeof(Number.prototype.toRadians) === "undefined") {
+       Number.prototype.toRadians = function() {
+         return this * Math.PI / 180;
+       }
+     }
+     
+     function drawGraph(dat) {
+       var speedData = {
+         x: [], 
+         y: [], 
+         name: 'Speed(km/h)',
+         line: {shape: 'spline'},
+         type: 'scatter'
+       };
+
+       var altitudeData = {
+         x: [], 
+         y: [], 
+         name: 'Altitude(m)', 
+         yaxis: 'y2',
+         line: {shape: 'spline'},
+         type: 'scatter'
+       };
+
+       dat = dat.features[0].geometry.coordinates.map(function(co, index, arr) {
+         var speed;
+         if(index > 0) {
+           var last = arr[index - 1];
+           var φ1 = last[1].toRadians();
+           var φ2 = co[1].toRadians();
+           var Δλ = (co[0]-last[0]).toRadians();
+           var R = 6371;
+           var d = Math.acos( Math.sin(φ1)*Math.sin(φ2) + Math.cos(φ1)*Math.cos(φ2) * Math.cos(Δλ) ) * R;
+           speed = d / ((last[3] - co[3]) / 1000 / 60 / 60);
+           speed = speed > 50 ? 50 : speed;
+         } else {
+           speed = 0;
+         }
+         if(co[3] < new Date('09:30:00 06 Nov 2016') || co[3] > new Date('18:30:00 06 Nov 2016')) {
+           return null;
+         }
+         speedData.x.push(new Date(co[3]));
+         altitudeData.x.push(new Date(co[3]));
+         speedData.y.push(speed);
+         altitudeData.y.push(co[2]);
+         return {
+           time: new Date(co[3]),
+           speed: speed,
+           altitude: co[2],
+           latitude: co[1],
+           longitude: co[0]
+         };
+       }).filter(function(x) {
+         return x !== null;
+       });
+       
+       var data = [speedData, altitudeData];
+
+       var layout = {
+         title: 'Altitude and Speed',
+         xaxis: {fixedrange: true},
+         yaxis: {title: 'Speed(km/h)', fixedrange: true}, 
+         yaxis2: {
+           title: 'Altitude(m)', 
+           titlefont: {color: 'rgb(148, 103, 189)'}, 
+           tickfont: {color: 'rgb(148, 103, 189)'}, 
+           overlaying: 'y', 
+           side: 'right',
+           fixedrange: true
+         },
+         showlegend: false,
+         margin: {
+           l: 35,
+           r: 35,
+           b: 20,
+           t: 30,
+           pad: 2
+         }
+       };
+
+       var graphDiv = document.getElementById('graph');
+
+       Plotly.newPlot(graphDiv, data, layout, {displayModeBar: false, showLink: false});
+
+       window.onresize = function() {
+         Plotly.Plots.resize(graphDiv);
+       };
+
+       function lLookup(time) {
+         var l = 0;
+         var r = dat.length;
+         while(true) {
+           var m = Math.floor((l + r) / 2);
+           var current = new Date(dat[m].time).getTime();
+           var target = new Date(time).getTime();
+           if(current === target || l === r) {
+             return dat[m];
+           } else if(current < target) {
+             r = m;
+           } else {
+             l = m;
+           }
+         }
+       };
+
+       var marker;
+       graphDiv.on('plotly_hover', function(data){
+         loc = lLookup(data.points[0].x);
+         marker = new L.Marker(L.latLng(loc.latitude, loc.longitude)).addTo(map);
+       })
+               .on('plotly_unhover', function(data){
+                 map.removeLayer(marker);
+               })
+               .on('');
+     };
+     
+    </script>
+  </body>
+</html>
