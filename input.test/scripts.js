@@ -1,4 +1,4 @@
-eventBubbling = false;
+eventBubbling = true;
 
 $log = document.getElementById('log');
 var log = function(msg) {
@@ -12,6 +12,12 @@ var keyLayout = {"0":{"key":"0","x":10,"y":0,"w":1},"1":{"key":"1","x":1,"y":0,"
 
 var keycode = [null,null,null,null,null,null,null,null,"Backspace","Tab",null,null,null,"Enter",null,null,"LShift","LCtrl","LAlt","Pause","CapsLock","Esc",null,null,null,null,null,"Esc",null,null,null,null,"Space","PgUp","PgDw","End","Home","Left","Up","Right","Down",null,null,null,null,"Insert","Delete",null,"0","1","2","3","4","5","6","7","8","9",null,null,null,"=",null,null,null,"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","LCmd",null,null,null,null,"0(Numpad)","1(Numpad)","2(Numpad)","3(Numpad)","4(Numpad)","5(Numpad)","6(Numpad)","7(Numpad)","8(Numpad)","9(Numpad)","*(Numpad)","+(Numpad)",null,"-(Numpad)",null,"/(Numpad)","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"NumLock",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"-",null,null,null,null,null,null,null,null,null,null,null,null,";","=",",","-",".","/","`",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"[","\\","]","'"];
 
+var pathsCanvas = document.getElementById('paths');
+
+var ctx = pathsCanvas.getContext("2d");
+var lines = [];
+var touches = [];
+
 var AnimateList = function() {
   var self = this;
   var items = [];
@@ -23,7 +29,7 @@ var AnimateList = function() {
     el.setAttribute('id', 'keys-' + id);
     el.classList.add('keys');
     el.style.color = '#'
-      + (64 + Math.floor(Math.random() * 128)).toString(16)
+                   + (64 + Math.floor(Math.random() * 128)).toString(16)
       + (64 + Math.floor(Math.random() * 128)).toString(16)
       + (64 + Math.floor(Math.random() * 128)).toString(16)
       + '';
@@ -94,10 +100,64 @@ var fire = function(c) {
   animateList.addItem(target);
 };
 
+document.getElementById('reset').addEventListener('touchend', function(e) {
+  ctx.clearRect(0, 0, pathsCanvas.width, pathsCanvas.height);  
+  e.preventDefault();
+});
+
+document.getElementById('reset').addEventListener('click', function(e) {
+  ctx.clearRect(0, 0, pathsCanvas.width, pathsCanvas.height);  
+  e.preventDefault();
+});
+
+document.getElementById('fullscreen').addEventListener('touchend', function(e) {
+  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+      (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {  
+          document.documentElement.requestFullScreen();  
+        } else if (document.documentElement.mozRequestFullScreen) {  
+          document.documentElement.mozRequestFullScreen();  
+        } else if (document.documentElement.webkitRequestFullScreen) {  
+          document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+        }  
+  } else {  
+    if (document.cancelFullScreen) {  
+      document.cancelFullScreen();  
+    } else if (document.mozCancelFullScreen) {  
+      document.mozCancelFullScreen();  
+    } else if (document.webkitCancelFullScreen) {  
+      document.webkitCancelFullScreen();  
+    }  
+  }  
+  e.preventDefault();
+});
+
+document.getElementById('fullscreen').addEventListener('click', function(e) {
+  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+      (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {  
+          document.documentElement.requestFullScreen();  
+        } else if (document.documentElement.mozRequestFullScreen) {  
+          document.documentElement.mozRequestFullScreen();  
+        } else if (document.documentElement.webkitRequestFullScreen) {  
+          document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+        }  
+  } else {  
+    if (document.cancelFullScreen) {  
+      document.cancelFullScreen();  
+    } else if (document.mozCancelFullScreen) {  
+      document.mozCancelFullScreen();  
+    } else if (document.webkitCancelFullScreen) {  
+      document.webkitCancelFullScreen();  
+    }  
+  }  
+  e.preventDefault();
+});
+
 var processMouse = function(event, action) {
   ctx.beginPath();
   ctx.strokeStyle = '#'
-       + (64 + Math.floor(Math.random() * 128)).toString(16)
+                  + (64 + Math.floor(Math.random() * 128)).toString(16)
     + (64 + Math.floor(Math.random() * 128)).toString(16)
     + (64 + Math.floor(Math.random() * 128)).toString(16)
     + '';
@@ -195,12 +255,6 @@ var processMouse = function(event, action) {
   document.body.addEventListener(x.e, x.h);
 });
 
-var pathsCanvasCtx = document.getElementById('paths').getContext("2d");
-
-var ctx = pathsCanvasCtx;
-var lines = [];
-var touches = [];
-
 var pathsPreDraw =  function(event) {
   log('Touch start. ');
   touches = event.touches;
@@ -295,4 +349,3 @@ window.onresize = function() {
 window.onresize();
 
 log('This page shows what signal have your keyboard, mouse and touchscreen sent. ');
-
