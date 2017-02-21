@@ -24,6 +24,7 @@ const handleDeviceMotion = (e) => {
   }
   const yg = e.accelerationIncludingGravity.y;
   const zg = e.accelerationIncludingGravity.z;
+  const interval = e.interval > 1 ? e.interval : e.interval * 1000;
 
   const a = Math.sqrt((xg * xg) + (yg * yg) + (zg * zg));
   pastFiveTickAvg.data += a / 2;
@@ -33,7 +34,7 @@ const handleDeviceMotion = (e) => {
   }
 
   if (throwing && pastFiveTickAvg.data < 3) {
-    lastThrowTime += e.interval;
+    lastThrowTime += interval;
   }
   if (pastFiveTickAvg.data < 3) {
     throwing = true;
@@ -55,7 +56,7 @@ const handleDeviceMotion = (e) => {
     $lastThrow.innerHTML = (lastThrowTime * lastThrowTime * 0.0000098 * 0.125).toFixed(2);
   }
 
-  log(`Refresh interval: ${e.interval}`);
+  // log(`Refresh interval: ${interval}`);
 };
 
 if (window.DeviceMotionEvent) {
