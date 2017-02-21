@@ -7,9 +7,9 @@ const log = (message) => {
   dataDiv.innerHTML = message;
 };
 
-const pastFiveTickData = [];
-const pastFiveTickAvg = {
-  data: 0,
+const pastTicksData = [10, 10];
+const pastTicksAvg = {
+  data: 10,
 };
 
 const $lastThrow = document.getElementById('lastThrow');
@@ -18,6 +18,7 @@ const $comment = document.getElementById('comment');
 let throwing = false;
 let lastThrowTime = 0;
 let bestThrowTime = 0;
+const windowSize = 2;
 
 const handleDeviceMotion = (e) => {
   const xg = e.accelerationIncludingGravity.x;
@@ -29,16 +30,14 @@ const handleDeviceMotion = (e) => {
   const interval = e.interval > 1 ? e.interval : e.interval * 1000;
 
   const a = Math.sqrt((xg * xg) + (yg * yg) + (zg * zg));
-  pastFiveTickAvg.data += a / 2;
-  pastFiveTickData.push(a);
-  if (pastFiveTickData.length > 2) {
-    pastFiveTickAvg.data -= pastFiveTickData.shift(1) / 2;
-  }
+  pastTicksData.push(a);
+  pastTicksAvg.data += a / windowSize;
+  pastTicksAvg.data -= pastTicksData.shift(1) / windowSize;
 
-  if (throwing && pastFiveTickAvg.data < 3) {
+  if (throwing && pastTicksAvg.data < 3) {
     lastThrowTime += interval;
   }
-  if (pastFiveTickAvg.data < 3) {
+  if (pastTicksAvg.data < 3) {
     throwing = true;
     document.body.className = 'animated';
   } else {
@@ -59,7 +58,7 @@ const handleDeviceMotion = (e) => {
     $lastThrow.innerHTML = (lastThrowTime * lastThrowTime * 0.0000098 * 0.125).toFixed(2);
   }
 
-  // log(`Refresh interval: ${interval}`);
+  log(pastTicksAvg.data);
 };
 
 if (window.DeviceMotionEvent) {
