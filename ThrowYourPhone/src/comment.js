@@ -13,7 +13,7 @@ const bSearch = (l, r, v, arr) => {
 const comments = [
   {
     v: 0.1,
-    c: 'Less than 10cm, you sucks! ',
+    c: 'Less than 10cm. You suck! ',
   },
   {
     v: 0.3,
@@ -21,7 +21,7 @@ const comments = [
   },
   {
     v: 0.6,
-    c: 'The first step to the addiction of throwing your phone. ',
+    c: 'The first step to the addiction of throwing your phone(s). ',
   },
   {
     v: 1.2,
