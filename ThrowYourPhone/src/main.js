@@ -1,4 +1,5 @@
 import './styles.css';
+import getComment from './comment';
 
 const dataDiv = document.getElementById('data');
 
@@ -13,6 +14,7 @@ const pastFiveTickAvg = {
 
 const $lastThrow = document.getElementById('lastThrow');
 const $bestThrow = document.getElementById('bestThrow');
+const $comment = document.getElementById('comment');
 let throwing = false;
 let lastThrowTime = 0;
 let bestThrowTime = 0;
@@ -50,6 +52,7 @@ const handleDeviceMotion = (e) => {
     const newRecord = (bestThrowTime * bestThrowTime * 0.0000098 * 0.125).toFixed(2);
     document.title = `New Record: ${newRecord}m`;
     $bestThrow.innerHTML = newRecord;
+    $comment.innerHTML = getComment(newRecord);
   }
 
   if (lastThrowTime !== 0) {
