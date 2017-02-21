@@ -44,12 +44,16 @@ const handleDeviceMotion = (e) => {
     document.body.className = '';
   }
 
-  bestThrowTime = lastThrowTime > bestThrowTime ? lastThrowTime : bestThrowTime;
+  if (lastThrowTime > bestThrowTime) {
+    bestThrowTime = lastThrowTime;
+    const newRecord = (bestThrowTime * bestThrowTime * 0.0000098 * 0.125).toFixed(2);
+    document.title = `New Record: ${newRecord}m`;
+    $bestThrow.innerHTML = newRecord;
+  }
 
   if (lastThrowTime !== 0) {
     $lastThrow.innerHTML = (lastThrowTime * lastThrowTime * 0.0000098 * 0.125).toFixed(2);
   }
-  $bestThrow.innerHTML = (bestThrowTime * bestThrowTime * 0.0000098 * 0.125).toFixed(2);
 
   log(`Refresh interval: ${e.interval}`);
 };
