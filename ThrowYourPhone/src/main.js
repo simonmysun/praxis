@@ -58,7 +58,7 @@ const handleDeviceMotion = (e) => {
     $lastThrow.innerHTML = (lastThrowTime * lastThrowTime * 0.0000098 * 0.125).toFixed(2);
   }
 
-  log(pastTicksAvg.data);
+  log(pastTicksAvg.data.toFixed(1));
 };
 
 if (window.DeviceMotionEvent) {

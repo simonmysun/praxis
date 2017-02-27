@@ -5,6 +5,8 @@ var dict = ''
 var head = '';
 var tail = '';
 
+var dontUnderstand = document.getElementById('neg').innerHTML;
+
 var aesCtr;
 
 var convert = function(text) {
@@ -14,6 +16,9 @@ var convert = function(text) {
 };
 
 var apostate = function(text) {
+  if(text.slice(0, head.length) !== head || text.slice(-tail.length) !== tail) {
+    throw -1;
+  }
   text = text.slice(head.length, -tail.length);
   var len = text.length;
   var res = [];
@@ -54,13 +59,17 @@ document.getElementById('de').addEventListener('click', function(e) {
     dict = dict.split(',');
   }
   aesCtr = new aesjs.ModeOfOperation.ctr(sha1(key).slice(12, 28).split('').map(function(x) {return parseInt(x, 16);}), new aesjs.Counter(5));
-  document.getElementById('source').value = (
-    aesjs.utils.utf8.fromBytes(
-      aesCtr.decrypt(
-        aesjs.utils.hex.toBytes(
-          base32.decode(
-            apostate(
-              document.getElementById('target').value))))));
+  try {
+    document.getElementById('source').value = (
+      aesjs.utils.utf8.fromBytes(
+        aesCtr.decrypt(
+          aesjs.utils.hex.toBytes(
+            base32.decode(
+              apostate(
+                document.getElementById('target').value))))));
+  } catch (e) {
+    document.getElementById('source').value = dontUnderstand;
+  }
   e.preventDefault();
   return false;
 });
@@ -83,17 +92,36 @@ var update = function() {
   dict = $dict.value;
 };
 
+var d = null;
 if(location.hash.length > 1) {
-  var tmp = JSON.parse(base32.decode(location.hash.slice(1)));
-  key = tmp.key;
-  head = tmp.head;
-  tail = tmp.tail;
-  dict = tmp.dict;
+  d = JSON.parse(base32.decode(location.hash.slice(1)));
+}
+
+if(location.search.length > 1) {
+  var data = location.search.substr(1).split("&");
+  var result = '';
+  for(var i = 0; i < data.length; i += 1) {
+    var tmp = data[i].split("=");
+    if(tmp[0] === 'p') {
+      d = JSON.parse(base32.decode(decodeURIComponent(tmp[1])));
+      break;
+    }
+  }
+  
+}
+
+if(d) {
+  key = d.key;
+  head = d.head;
+  tail = d.tail;
+  dict = d.dict;
   $key.value = key;
   $head.value = head;
   $tail.value = tail;
   $dict.value = dict;
 }
+
+
 
 $key.oninput = update;
 $head.oninput = update;
