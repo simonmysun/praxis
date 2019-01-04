@@ -51,6 +51,9 @@ Solution: Observe each problem's url, and you will find out they composite a sen
 
 ## Credit
 * https://github.com/ofrohn/d3-celestial
+* https://github.com/mourner/suncalc
+* http://www.schule.bayern.de/karol
 * https://github.com/googlecreativelab/quickdraw-dataset
+* https://github.com/tensorflow/tfjs
 * https://medium.com/tensorflow/train-on-google-colab-and-run-on-the-browser-a-case-study-8a45f9b1474e
 * https://dialogflow.com
