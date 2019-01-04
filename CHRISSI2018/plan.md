@@ -21,7 +21,7 @@ Solution: You have to adjust your time to see the flag.
 
 ### Robot Karol
 
-I wrote a programm printing birthday greetings in Robot Karol. However it cannot run because of some mistakes and the limitation of Robot Karol software.
+I wrote a programm printing birthday greetings in Robot Karol 2.3. However it cannot run because of some mistakes and the limitation of Robot Karol software.
 
 Solution: Fix the bugs and run the programm in parts separately. Or you may also understand the program and interpret the it your self.
 
