@@ -1,0 +1,100 @@
+airplane:
+alarm_clock:
+anvil:
+apple:An apple a day keeps the doctor away. But it was not an apple. Maybe something else? A coffee cup? A cell phone? or A laptop?
+axe:
+baseball:
+baseball_bat:
+basketball:
+beard:
+bed:
+bench:
+bicycle:
+bird:Nice. Beautiful. I should take a photo of it.
+book:I love reading books. But I didn't read books in this forest. I always play a game called "Schnapp dir den Ball" or something.
+bread:There might be one after some picnic. But, no.
+bridge:
+broom:
+butterfly:Beautiful. I should take a photo of it.
+camera:If I have one I will take a photo first. Then I don't have to remember.
+candle:This can burn all the trees. No.
+car:
+cat:Nope I wasn't playing with a cat.
+ceiling_fan:
+cell_phone:Hah someone dropped a phone here? I don't think so.
+chair:Not really.
+circle:
+clock:
+cloud:Not really it was clear.
+coffee_cup:No.. why would one bring a coffee cup here? It is more reasonable that people leave cookies or hotdogs here sometimes.
+cookie:There might be one after some picnic. But, no.
+cup:No.. why would one bring a cup here? It is more reasonable that people leave cookies or hotdogs here sometimes.
+diving_board:
+dog:YES she was here! FLAG{a87465}
+donut:There might be one after some picnic. But, no.
+door:
+drums:
+dumbbell:
+envelope:
+eye:
+eyeglasses:
+face:
+fan:
+flower:Lovely. But, no.
+frying_pan:
+grapes:There might be one after some picnic. But, no.
+hammer:
+hat:
+headphones:
+helmet:
+hot_dog:Hmm.. it reminds me ice cream.
+ice_cream: Hmm.. it reminds me hot dogs.
+key:
+knife:It's dangerous. No.
+ladder:
+laptop:This is what I always want to do. But I haven't tried once. The laptop is heavy and requires electricity. I think I should start from reading.
+light_bulb:
+lightning:
+line:
+lollipop:There might be one after some picnic. But, no.
+microphone:
+moon:
+mountain:
+moustache:
+mushroom:It's too cold to grow mushroom.
+pants:
+paper_clip:
+pencil:
+pillow:
+pizza:There might be one after some picnic. But, no.
+power_outlet:
+radio:
+rainbow:That is pretty. But rainbow usually appears after rain.
+rifle:It's very dangerous. No.
+scissors:
+screwdriver:
+shorts:
+shovel:
+smiley_face:
+snake:No. The snake doesn't fit this environment well. I think there were more likely spiders or birds.
+sock:Interesting, one can never have enough socks.
+spider:OH A SPIDER! No it wasn't. Spiders scares people.
+spoon:There might be one after some picnic. But, no.
+square:It's too simple.
+star:I like watching stars. But they are normally visible at night.
+stop_sign:
+suitcase:
+sun:Don't be ridiculous. There can't be a sun.
+sword:It's dangerous. No.
+syringe:
+table:
+tennis_racquet
+tent:
+tooth:
+traffic_light
+tree:Are you serious...
+triangle:
+t-shirt:
+umbrella:Right it would be very useful here. Especially when it rains. But it's not what I want.
+wheel:
+wristwatch:

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Sagittarius</title>
+    <script type="text/javascript" src="./d3.min.js"></script>
+    <script type="text/javascript" src="./d3.geo.projection.min.js"></script>
+    <script type="text/javascript" src="./suncalc.js"></script>
+    <script type="text/javascript" src="./celestial.min.js"></script>
+    <link rel="stylesheet" href="./celestial.css">
+  </head><body>
+    <div style="overflow:hidden;"><div id="celestial-map"></div></div>
+    <div id="celestial-form" style="display: none;"></div>
+    <script type="text/javascript">
+      var altitude = SunCalc.getPosition(new Date(), 50.048206, 8.783670).altitude;
+      // altitude = -0.1;
+      var config = {
+          width: 720,
+          center: [50.048206, 8.783670, 0],
+          orientationfixed: true,
+          geopos: [50.048206, 8.783670],
+          location: true,
+          form: false,
+          lang: "de",
+          adaptable: false,
+          interactive: false,
+
+          projection: "stereographic",
+          transform: "galactic",
+
+          background: {        // Background style
+              fill: 'rgb(' + (function(al) {
+                  al = al + 0.25;
+                  var colors = [ [ -10000, 0, 0, 0 ],
+                                 [ 0, 0, 0, 0 ],
+                                 [ 0.15, 0, 0, 0 ],
+                                 [ 0.2, 11, 1, 79 ],
+                                 [ 0.23, 98, 13, 115 ],
+                                 [ 0.27, 184, 2, 68 ],
+                                 [ 0.31, 230, 168, 0 ],
+                                 [ 0.37, 89, 164, 255 ],
+                                 [ 0.79, 156, 207, 255 ],
+                                 [ 1, 245, 250, 255 ],
+                                 [ 1000, 245, 250, 255 ]];
+                  for(k = 0; k < colors.length; k += 1) {
+                      if(al < colors[k][0]) {
+                          return colors[k].slice(1).map((x, i) => (colors[k][0] * x + al * colors[k - 1][i + 1]) / (colors[k][0] + colors[k - 1][0]));
+                      }
+                  }
+              })(altitude).join(',') + ')',
+              opacity: 1,
+              stroke: "#113355", // Outline
+              width: 1.5
+          },
+
+          stars: {
+              show: true,    // Show stars
+              limit: 6,      // Show only stars brighter than limit magnitude
+              colors: true,  // Show stars in spectral colors, if not use "color"
+              style: { fill: "#ffffff", opacity: (function (al) {
+                  al = al * 180 / Math.PI;
+                  if(al < -3) {
+                      return 1;
+                  } else if(al > 0) {
+                      return 0.001;
+                  } else {
+                      return (-al) / 3.01;
+                  }
+              })(altitude)}, // Default style for stars
+              names: false,   // Show star names (Bayer, Flamsteed, Variable star, Gliese, whichever applies first)
+              proper: false, // Show proper name (if present)
+              desig: false,  // Show all names, including Draper and Hipparcos
+              namelimit: 2.5,  // Show only names for stars brighter than namelimit
+              namestyle: { fill: "#ddddbb", font: "11px Georgia, Times, 'Times Roman', serif", align: "left", baseline: "top" },
+              size: 4,       // Maximum size (radius) of star circle in pixels
+              data: 'stars.6.json' // Data source for stellar data
+              //data: 'stars.8.json' // Alternative deeper data source for stellar data
+          },
+          planets: {  //Show planet locations, if date-time is set
+              show: true,
+              // List of all objects to show
+              which: ["sol", "mer", "ven", "ter", "lun", "mar", "jup", "sat", "ura", "nep"],
+              // Font styles for planetary symbols
+              style: { fill: "#00ccff", font: "bold 17px 'Lucida Sans Unicode', Consolas, sans-serif",
+                       align: "center", baseline: "middle" },
+              symbols: {  // Character and color for each symbol in 'which', simple circle \u25cf
+                  "sol": {symbol: "\u2609", fill: "#ffff00"},
+                  "mer": {symbol: "\u263f", fill: "#cccccc"},
+                  "ven": {symbol: "\u2640", fill: "#eeeecc"},
+                  "ter": {symbol: "\u2295", fill: "#00ffff"},
+                  "lun": {symbol: "\u25cf", fill: "#ffffff"}, // overridden by generated cresent
+                  "mar": {symbol: "\u2642", fill: "#ff9999"},
+                  "cer": {symbol: "\u26b3", fill: "#cccccc"},
+                  "ves": {symbol: "\u26b6", fill: "#cccccc"},
+                  "jup": {symbol: "\u2643", fill: "#ff9966"},
+                  "sat": {symbol: "\u2644", fill: "#ffcc66"},
+                  "ura": {symbol: "\u2645", fill: "#66ccff"},
+                  "nep": {symbol: "\u2646", fill: "#6666ff"},
+                  "plu": {symbol: "\u2647", fill: "#aaaaaa"},
+                  "eri": {symbol: "\u25cf", fill: "#eeeeee"}
+              }
+          },
+          dsos: {
+              show: false
+          },
+          constellations: {
+              show: false
+          },
+          mw: {
+              show: true,    // Show Milky Way as filled polygons
+              style: { fill: "#ffffff", opacity: (function (al) {
+                  al = al * 180 / Math.PI;
+                  if(al < -3) {
+                      return 1;
+                  } else if(al > 0) {
+                      return 0.001;
+                  } else {
+                      return (-al) / 3.01;
+                  }
+              })(altitude) * 0.15 }
+          },
+          lines: {
+              graticule: { show: false, stroke: "#cccccc", width: 0.6, opacity: 0.8 },     // Show graticule lines
+              equatorial: { show: false, stroke: "#aaaaaa", width: 1.3, opacity: 0.7 },    // Show equatorial plane
+              ecliptic: { show: false, stroke: "#66cc66", width: 1.3, opacity: 0.7 },      // Show ecliptic plane
+              galactic: { show: false, stroke: "#cc6666", width: 1.3, opacity: 0.7 },     // Show galactic plane
+              supergalactic: { show: false, stroke: "#cc66cc", width: 1.3, opacity: 0.7 } // Show supergalactic plane
+          },
+
+          datapath: "./data/",
+          planets:  { show: true },
+          horizon: {  //Show horizon marker, if location is set and map projection is all-sky
+              show: true,
+              stroke: "#999900", // Line
+              width: 1.0,
+              fill: "#003300",   // Area below horizon
+              opacity: 1
+          }
+      };
+
+      // Asterisms canvas style properties for lines and text
+      var lineStyle = {
+          stroke:"rgba(0,0,0,0)",
+          fill: "rgba(255, 204, 204, 0)",
+          width:0
+      },
+          textStyle = {
+              fill:"rgba(255,255,255," + (function (al) {
+                  al = al * 180 / Math.PI;
+                  if(al < -3) {
+                      return 1;
+                  } else if(al > 0) {
+                      return 0.001;
+                  } else {
+                      return (-al) / 3.01;
+                  }
+              })(altitude) * 0.2 + ")",
+              font: "bold 15px Helvetica, Arial, sans-serif",
+              align: "center",
+              baseline: "middle"
+          };
+      // JSON structure of the object to be displayed, in this case
+      // the Summer Triangle between Vega, Deneb and Altair
+      var jsonLine = {
+          "type":"FeatureCollection",
+          // this is an array, add as many objects as you want
+          "features":[
+              {"type":"Feature",
+               "id":"Sgr",
+               "properties": {
+                   // Name
+                   "n":"FLAG{389097}",
+                   // Location of name text on the map
+                   "loc": [11.2167533, -12.8755444]
+               }, "geometry":{
+                   // the line object as an array of point coordinates
+                   "type":"MultiLineString",
+                   "coordinates":[(function() {
+                       var x=-75;
+                       var y=-30;
+                       return [
+                           [x - 20, y - 15],
+                           [x + 20, y - 15],
+                           [x + 20, y + 15],
+                           [x - 20, y + 15],
+                           [x - 20, y - 15]
+                       ];
+                   })()]
+               }
+              }
+          ]};
+      Celestial.add({type:"line", callback: function(error, json) {
+          if (error) return console.warn(error);
+          // Load the geoJSON file and transform to correct coordinate system, if necessary
+          var asterism = Celestial.getData(jsonLine, config.transform);
+          // Add to celestiasl objects container in d3
+          Celestial.container.selectAll(".asterisms")
+              .data(asterism.features)
+              .enter().append("path")
+              .attr("class", "ast");
+          // Trigger redraw to display changes
+          Celestial.redraw();
+      }, redraw: function() {
+          // Select the added objects by class name as given previously
+          Celestial.container.selectAll(".ast").each(function(d) {
+              // Set line styles
+              Celestial.setStyle(lineStyle);
+              // Project objects on map
+              Celestial.map(d);
+              // draw on canvas
+              Celestial.context.fill();
+              Celestial.context.stroke();
+
+              // If point is visible (this doesn't work automatically for points)
+              if (Celestial.clip(d.properties.loc)) {
+                  // get point coordinates
+                  pt = Celestial.mapProjection(d.properties.loc);
+                  // Set text styles
+                  Celestial.setTextStyle(textStyle);
+                  // and draw text on canvas
+                  Celestial.context.fillText(d.properties.n, pt[0], pt[1]);
+              }
+          });
+      } });
+
+      Celestial.display(config);
+    </script>
+    <p><script>document.write(new Date())</script> @ 50.062342N 8.806981E Heusenstamm</p>
+    <p>Das Geheimnis liegt im Zentrum von Galaxy. </p>
+  </body>
+</html>

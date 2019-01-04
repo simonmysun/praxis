@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Überweisung</title>
+    <script src="ApiAi.min.js"></script>
+    <style>
+      #transfer-form {
+          margin: 20px;
+          border: 1px solid #777;
+          width: 400px;
+          padding: 7px;
+      }
+      #dialog {
+          margin: 20px;
+          border: 1px solid #777;
+          width: 400px;
+          padding: 7px;
+      }
+      #dialog>form {
+          text-align: right;
+      }
+      #dialog-heading {
+          padding: 7px;
+          border-bottom: 1px solid #777;
+      }
+      #dialog>form {
+          padding: 7px;
+          border-top: 1px solid #777;
+      }
+      #response {
+          padding: 7px;
+          height: 400px;
+          overflow: auto;
+      }
+      .bot-request {
+          margin: 5px 5px 5px 50px;
+          border: 1px solid #aaa;
+          border-radius: 5px;
+          padding: 3px;
+          text-align: right;
+      }
+      .bot-response {
+          margin: 5px 50px 5px 5px;
+          border: 1px solid #aaa;
+          border-radius: 5px;
+          padding: 3px;
+          text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 500px">
+      <p>Maomao developed a smart assistant for ACME Bank. However, ACME Bank does not trust the security of it. To make it more 'secure', they banned all the transfer requests from users and allocated a clerk to help. The users have to submit a money transfer form to the clerk. Then clerk will check the form, and read it to the smart assistant. The smart assistant will, by the request of ACME Bank, only perform the transfer when the request is from the clerk. </p>
+      <p>Can you try to hack this and transfer some money from 'maomao account'? The flag will be shown once any transfer from 'maomao account' is performed. </p>
+    </div>
+    <div id="dialog">
+      <div id="dialog-heading">
+        ACME Bank smart assistant
+      </div>
+      <div id="response">
+      </div>
+      <form onsubmit="return submiting()">
+        <input type="text" id="message">
+        <input type="submit">
+      </form>
+    </div>
+    <form id="transfer-form" onsubmit="return transfersubmiting()">
+      <div>From: <br>
+        <select id="transfer-from">
+          <option value="checking account">Checking account</option>
+          <option value="saving account">Saving account</option>
+          <option value="credit card">Credit card</option>
+          <option value="maomao account">Maomao account</option>
+        </select>
+      </div>
+      <div>To: <br>
+        <select id="transfer-to">
+          <option value="checking account">Checking account</option>
+          <option value="saving account">Saving account</option>
+          <option value="credit card">Credit card</option>
+          <option value="maomao account">Maomao account</option>
+        </select>
+      </div>
+      <div>Amount: <br><input type="text" id="transfer-amount"> dollar(s)</div>
+      <input type="submit">
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
