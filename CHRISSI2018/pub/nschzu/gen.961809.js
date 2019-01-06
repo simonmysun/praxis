@@ -44,8 +44,8 @@ for(var i = 0; i < r.length; i += 1) {
     p[74 - col * 3 - 1][row * 5] = r[i][1];
     p[74 - col * 3][row * 5 + 1] = r[i][2];
     p[74 - col * 3 - 1][row * 5 + 1] = r[i][3];
-    p[74 - col * 3 - 1][row * 5 + 2] = r[i][4];
-    p[74 - col * 3][row * 5 + 2] = r[i][5];
+    p[74 - col * 3][row * 5 + 2] = r[i][4];
+    p[74 - col * 3 - 1][row * 5 + 2] = r[i][5];
 }
 
 console.log(p.map(x => x.join('')).join('\n'));
