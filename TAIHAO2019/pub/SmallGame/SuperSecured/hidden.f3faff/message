@@ -1,0 +1,4 @@
+This cypher method is theoretically unbreakable when the key is random and length of key is at least as long as the message.
+
+The key is:
+attention_it_is_never_secured_if_you_do_not_use_it_correctly

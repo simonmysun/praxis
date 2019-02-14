@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>18 --> 19</title>
+    <link href="./../../assets/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2>HAPPY 19TH BIRTHDAY TO TAIHAO!
+</h2>
+    <p>What is the password? </p>
+    <form onsubmit="return validate()">
+      <input id="pw" type="text"><input type="submit">
+    </form>
+    <hr>
+    <a href="./../../about.md">About</a> (Spoilers! )
+    <script src="./../../assets/md5.js"></script>
+    <script>
+      window.currentLevel = 5;
+      function validate() {
+          var password = document.getElementById('pw').value;
+          var text = document.getElementsByTagName('h2')[0].innerHTML;
+          var sum = 0;
+          for(var i = 0; i < text.length; i += 1) {
+              sum += text.charCodeAt(i);
+          }
+          if(password === sum.toString(2)) {
+              alert('Success. ');
+              goToNextLevel(password);
+          } else {
+              alert('Wrong password. ')
+          }
+          return false;
+      }
+
+      function goToNextLevel(password) {
+          var msg = atob('ZVleXFBCelVWV1RDQl5f');
+          var key = password.split('').map(x => x.charCodeAt(0));
+          var res = [];
+          for(var i = 0; i < msg.length; i += 1) {
+              res.push(msg.charCodeAt(i) ^ key[i % key.length]);
+          }
+          window.location.href = './../' + (res.map(x => String.fromCharCode(x)).join('')) + '/';
+      }
+    </script>
+    <script src="./../../assets/script.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

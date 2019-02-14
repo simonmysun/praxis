@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>18 --> 19</title>
+    <link href="./../../assets/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2>Super Secured</h2>
+    <p>After studying some cryptography, I have developed a ciphering tool which is fast and secure. </p>
+    <p><a href="./pub.zip">Here</a> is the software and the key to the next level ciphered. </p>
+    <p>Oops! How careless I was, I didn't delete the original message file. Fortunately I have removed the key to the next level and the key to decipher. </p>
+
+    <form onsubmit="return validate()">
+      <input id="msg" type="test"><input type="submit">
+    </form>
+    <hr>
+    <a href="./../../about.md">About</a> (Spoilers! )
+    <script src="./../../assets/md5.js"></script>
+    <script>
+      window.currentLevel = 9;
+      function validate() {
+          var msg = document.getElementById('msg').value;
+          if(md5(msg + '\n') === 'c7a66f870cbbd0fc243a657efba35d5e') {
+              alert('Success. ');
+              goToNextLevel(msg);
+          } else {
+              alert('Wrong password. ');
+          }
+          return false;
+      }
+      function goToNextLevel(password) {
+          var msg = atob('MxECABwHDCoAOAAaOgwBNgACIg0XCxsMERE=');
+          var key = password.split('').map(x => x.charCodeAt(0));
+          var res = [];
+          for(var i = 0; i < msg.length; i += 1) {
+              res.push(msg.charCodeAt(i) ^ key[i % key.length]);
+          }
+          window.location.href = './../' + (res.map(x => String.fromCharCode(x)).join('')) + '/';
+      }
+    </script>
+    <script src="./../../assets/script.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

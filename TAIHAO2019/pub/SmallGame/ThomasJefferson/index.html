@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>18 --> 19</title>
+    <link href="./../../assets/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2>Thomas Jefferson</h2>
+    <p>Here's a ciphered message: </p>
+    <blockquote>JFTIEIVJL</blockquote>
+    <p>The key is: </p>
+    <blockquote>9, 7, 2, 4, 6, 1, 5, 8, 3</blockquote>
+    <p>Here's a tool which might help. </p>
+    <pre>
+1:	< ZWAXJGDLUBVIQHKYPNTCRMOSFE <
+2:	< KPBELNACZDTRXMJQOYHGVSFUWI <
+3:	< BDMAIZVRNSJUWFHTEQGYXPLOCK <
+4:	< RPLNDVHGFCUKTEBSXQYIZMJWAO <
+5:	< IHFRLABEUOTSGJVDKCPMNZQWXY <
+6:	< AMKGHIWPNYCJBFZDRUSLOQXVET <
+7:	< GWTHSPYBXIZULVKMRAFDCEONJQ <
+8:	< NOZUTWDCVRJLXKISEFAPMYGHBQ <
+9:	< XPLTDSRFHENYVUBMCQWAOIKZGJ <
+10:	< UDNAJFBOWTGVRSCZQKELMXYIHP <
+</pre>
+    <p>Can you decipher the message? </p>
+    <form onsubmit="return validate()">
+      <input id="msg" type="test"><input type="submit">
+    </form>
+    <h3>Do you know? </h3>
+    <p>
+      Actually, you can also deduct the key from the message and ciphered text.
+    </p>
+    <hr>
+    <a href="./../../about.md">About</a> (Spoilers! )
+    <script src="./../../assets/md5.js"></script>
+    <script>
+      window.currentLevel = 6;
+      function validate() {
+          var msg = document.getElementById('msg').value;
+          if(md5(msg + '\n') === '64629d04ee3282f485f1f28c3dc80068') {
+              alert('Success. ');
+              goToNextLevel(msg);
+          } else {
+              alert('Wrong password. ');
+          }
+          return false;
+      }
+      function goToNextLevel(password) {
+          var msg = atob('AD8KJCAzFCccLjkPJD11');
+          var key = password.split('').map(x => x.charCodeAt(0));
+          var res = [];
+          for(var i = 0; i < msg.length; i += 1) {
+              res.push(msg.charCodeAt(i) ^ key[i % key.length]);
+          }
+          window.location.href = './../' + (res.map(x => String.fromCharCode(x)).join('')) + '/';
+      }
+    </script>
+    <script src="./../../assets/script.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

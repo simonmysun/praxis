@@ -1,0 +1,110 @@
+.row {
+    display: flex;
+}
+.col {
+    
+}
+
+.multiplication small {
+    color: #aaa;
+}
+
+.matched.match, .unmatched.unmatch {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.unmatched.match, .matched.unmatch {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+body.snake {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+.snake .canvas {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+}
+.snake canvas {
+    width: 133.333333333vh;
+    height: 100vh;
+    background: #fff;
+    margin: 0 calc(50vw - 66.666666666vh);
+    z-index: 1;
+}
+
+.snake .editor {
+    width: calc(100vw - 120px);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 120px;
+    height: 100vh;
+    position: absolute;
+    z-index: 10;
+}
+
+.snake .intro {
+    width: calc(100vw - 120px);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 120px;
+    height: 100vh;
+    position: absolute;
+    background-color: #000B;
+    color: white;
+    overflow: auto;
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.snake .ace-monokai .ace_gutter {
+    background: #2F3129BB;
+}
+
+.snake .ace-monokai {
+    background-color: #272822BB;
+}
+
+.snake .buttons {
+    position: absolute;
+    width: 120px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.snake .buttons input {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+}
+
+.snake .dg.ac {
+    z-index: 100;
+}

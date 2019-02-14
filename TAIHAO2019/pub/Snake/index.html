@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>18 --> 19</title>
+    <link href="./../assets/style.css" rel="stylesheet">
+  </head>
+  <body class="snake">
+    <div class="canvas">
+      <canvas></canvas>
+    </div>
+    <div class="buttons">
+      <input type="button" id="game" value="Snake">
+      <input type="button" id="intro" value="Intro">
+      <input type="button" id="code" value="Editor">
+    </div>
+    <div class="intro hidden">
+      <p>Layout designed for horizontal screens with aspect ratio larger than 4 : 3. </p>
+      <h1>Snake</h1>
+      <h2>Problem Description</h2>
+      <p>Here's a greedy snake locked in an 2D rectangle cage. It will be released after eating 295 piece of food which is put randomly in the cage one by one. However, the more it eats, the longer it grows, and the longer it grows, the less space it has. Please help it decide how to move. </p>
+      <p>A final score is here to measure how good you perform. It is calculated by adding your round score, which is the square of the number of food the snake has eaten. Once the final score reaches 19000, the key for this problem will be shown. </p>
+      <p>However, there's another restraint: You can only move 10000 steps before you reach 19000 of final score. So you have to optimize your route. </p>
+      <h2>Control and Display</h2>
+      <p>The control of the snake is as same as traditional snake games. Use arrow keys to tell where the snake should go. The top-right panel allows you to change the delay between steps. </p>
+      <p>You can also control the snake with code. </p>
+      <p>On the screen, colored blocks means the body of the snake. Its head is in orange and the hue of the colors of its body changes as it grows. The food is marked with an blue octacon. In the background, The big number indicates the round score, and at the top of it, is the final score. Above the final score is a number showing how many steps are left. At the bottom-right corner their are two graps. The bottom one shows the performance of snake, and the other one shows the performance of rendering. </p>
+      <h2>Artificial Intelligence</h2>
+      <p>It is boring to control the snake to make 10000 moves. Let's automate it. Open the editor from the top-left corner. You can write your script for the snake. All you need is a JavaScript function returning another function which will be called every time the snake makes a move. </p>
+      <p>Here are some examples: </p>
+      <ul>
+        <li><a href="./demo0.js">demo0.js</a>: A snake going right and down. </li>
+        <li><a href="./demo1.js">demo1.js</a>: A snake who fills the cage with its footprints (a foot of snake???). </li>
+        <li><a href="./demo2.js">demo2.js</a>: A snake who is a little bit 'intelligent'. </li>
+        <li><a href="./demo3.js">demo3.js</a>: A very bad programmed, BFS based snake. </li>
+      </ul>
+      <p>It's never recommended to alter the demo code. Write your own. There are far better strategies. </p>
+      <h2>Tips about debugging</h2>
+      <p>Your scripts are run under a Web Worker. So you might need to change thread context while debugging: https://developers.google.com/web/tools/chrome-devtools/javascript/reference#threads</p>
+      <hr>
+      <a href="./../about.md">About</a> (Spoilers! )
+    </div>
+    <div class="editor hidden">
+      <div id="editor"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js" integrity="sha256-rfN9xU0ELcvTsc3WUaKlvSVEfzLvFCyl+ID09aieASo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.5/dat.gui.js" integrity="sha256-bm/PnaB2yfONj0Z6T+LqRZW8VZMN5fhrSmgpxXXLC3o=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stats-js@1.0.0/build/stats.min.js" integrity="sha256-1R846tTinE7e93sFWMOwu+83z2qr9y0vOB2w5FkYJxQ=" crossorigin="anonymous"></script>
+    <script src="./../assets/md5.js"></script>
+    <script src="./../assets/script.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

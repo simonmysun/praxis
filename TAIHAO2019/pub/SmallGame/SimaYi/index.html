@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>18 --> 19</title>
+    <link href="./../../assets/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2>What were I searching? </h2>
+    <img src="./Screenshot_2019-02-02_17-33-15.jpg">
+    <form onsubmit="return validate()">
+      <input id="msg" type="test"><input type="submit">
+    </form>
+    <hr>
+    <a href="./../../about.md">About</a> (Spoilers! )
+    <script src="./../../assets/md5.js"></script>
+    <script>
+      window.currentLevel = 8;
+      function validate() {
+          var msg = document.getElementById('msg').value;
+          if(md5(msg + '\n') === '9ff4930c13ef5bd1396600f01a0d4579') {
+              alert('Success. ');
+              goToNextLevel(md5(msg + 'TAIHAO2019\n'));
+          } else {
+              alert('Wrong password. ');
+          }
+          return false;
+      }
+      function goToNextLevel(password) {
+          var msg = atob('ZhZJAxNlBFVGEVwC');
+          var key = password.split('').map(x => x.charCodeAt(0));
+          var res = [];
+          for(var i = 0; i < msg.length; i += 1) {
+              res.push(msg.charCodeAt(i) ^ key[i % key.length]);
+          }
+          window.location.href = './../' + (res.map(x => String.fromCharCode(x)).join('')) + '/';
+      }
+    </script>
+    <script src="./../../assets/script.js"></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
