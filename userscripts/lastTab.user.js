@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Prevent closing last tab on some websites
 // @namespace    https://github.com/simonmysun/
-// @version      0.1
+// @version      0.1.1
 // @description  try to take over the world!
 // @author       simonmysun
 // @updateURL    https://github.com/simonmysun/praxis/raw/gh-pages/userscripts/lastTab.user.js
