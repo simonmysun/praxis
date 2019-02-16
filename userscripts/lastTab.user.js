@@ -15,6 +15,9 @@
 
 (function() {
     'use strict';
+    if(window.top !== window.self) {
+        return;
+    }
     var gm_pageId = `{${Math.random() + '/' + Date.now()}}`;
     localStorage.gm_pageCountPing = gm_pageId;
     var gm_pageNum = 1;
