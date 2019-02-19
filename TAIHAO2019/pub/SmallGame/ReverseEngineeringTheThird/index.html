@@ -18,7 +18,6 @@
 
       function validate() {
           var password = document.getElementById('pw').value;
-          password = 'Taihao Happy Birthday';
           var p = password.toLowerCase().split('').filter(c => 'PiratBoy HD'.toLowerCase().split('').indexOf(c) !== -1).join('').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' \n').split('').map(x => x.charCodeAt(0));
           var sum = 0;
           for(var i = 0; i < p.length; i += 1) {

@@ -89,6 +89,15 @@ var routes = [
     {
         path: '/(index\.html)?',
         init: () => {
+            document.getElementById('intr').innerHTML = `To get the final birthday present you need an integer \$M\\in \\left\\{x|1298138842\\leqslant x\\leqslant 905594647621\\right\\}\$. \$M\$ is the smallest positive solution of \$\$
+      \\begin{align*}
+      M \&\\bmod 23489 \&= ${ getStatus('a') > 0 ? getStatus('a_s') : 'r_1'} \\\\
+      M \&\\bmod 3917 \&= ${ getStatus('b') > 0 ? getStatus('b_s') : 'r_2'} \\\\
+      M \&\\bmod 39182 \&= ${ getStatus('c') > 0 ? getStatus('c_s') : 'r_3'} \\\\
+      M \&\\bmod 13217 \&= ${ getStatus('d') > 10 ? getStatus('d_s') : 'r_4'} \\\\
+      M \&\\bmod 33131 \&= ${ getStatus('e') > 0 ? getStatus('e_s') : 'r_5'}
+      \\end{align*}
+      \$\$, where \$r\$ can be revealed after you solve the problems below.`
             document.getElementsByTagName('form')[0].setAttribute('onsubmit', 'return validate()');
             window.validate = () => {
                 var el = document.getElementsByTagName('input')[0];
@@ -121,8 +130,10 @@ var routes = [
                 var el = document.getElementsByTagName('input')[0];
                 var answer = el.value;
                 if(md5(answer + '\n') === '5133624be1ee45e8fb8cd97a3fa48a35') {
-                    alert('Success! The key is '+ (answer.split('').map(x => x.charCodeAt(0)).reduce((a, c) => (a * 13 + c) % 6091) * 23 + 691) + '. ');
+                    var ans = answer.split('').map(x => x.charCodeAt(0)).reduce((a, c) => (a * 13 + c) % 6091) * 23 + 691;
+                    alert('Success! The key is '+ ans + '. ');
                     setStatus('a', 1);
+                    setStatus('a_s', ans);
                     addAchievement('Poker Master', 'Finishing "Poker"');
                 } else {
                     alert('Fail. ');
@@ -191,6 +202,7 @@ var routes = [
                         }
                     }
                     setStatus('b', 1);
+                    setStatus('b_s', parseInt(`${2*2}${2}${2}`));
                     addAchievement('I Know Regex', 'Finishing "Multiplication"');
                     alert('Success! The key is ' + `${2*2}${2}${2}` + '. ');
                 }
@@ -435,8 +447,10 @@ var routes = [
                     };
                     if(finalScore >= 19000) {
                         var k = (finalScore / finalScore << 3) - 1;
-                        alert('Success! The key is ' + (k * k * k * k * k - k - 1) + '.');
+                        var ans = k * k * k * k * k - k - 1;
+                        alert('Success! The key is ' + ans + '.');
                         setStatus('c', 1);
+                        setStatus('c_s', ans);
                         addAchievement('AI Expert', 'Finishing "Snake"');
                     }
                     return;
@@ -579,7 +593,7 @@ var routes = [
             setStatus('d', window.currentLevel);
             if(window.key !== undefined) {
                 alert('Success! The key is ' + window.key + '. ');
-                setStatus('d', 1);
+                setStatus('d_s', window.key);
                 addAchievement('A small step to a hacker', 'Finishing "Small Game"');
             }
         }
@@ -639,8 +653,9 @@ var routes = [
                 }
                 outputEl.value = res.join('\n');
                 if(outputEl.value + '\n' === inputForCompare) {
-                    alert('Success! The key is ' + (129*129) + '. ');
-                    setStatus('b', 1);
+                    alert('Success! The key is ' + (129 * 129) + '. ');
+                    setStatus('e', 1);
+                    setStatus('e_s', 129 * 129);
                     addAchievement('Achievement of Achievement', 'Finishing "Quine"');
                 }
             }

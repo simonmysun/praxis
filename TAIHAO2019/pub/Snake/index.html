@@ -37,6 +37,21 @@
       <p>It's never recommended to alter the demo code. Write your own. There are far better strategies. </p>
       <h2>Tips about debugging</h2>
       <p>Your scripts are run under a Web Worker. So you might need to change thread context while debugging: https://developers.google.com/web/tools/chrome-devtools/javascript/reference#threads</p>
+      <h2>Documentation</h2>
+      <p>When the game started the system calls a function provided by users' scripts. </p>
+      <pre><code>var nxt = init(w, h);</code></pre>
+      <p>where <code>w</code> and <code>h</code> are the width and height of available space. Here in this game the width is <code>20</code> and the height is <code>15</code>.
+      <p>In each tick, when it's time to determine where to go, the system calls the function <code>nxt</code> which is mentioned above, with a status of snake and a status of food, and expects a direction to navigate the snake. </p>
+      <pre><code>var dir = nxt(snake, food);</code></pre>
+      <p>where <code>snake</code> is an array of objects, which contains property <code>x</code> and <code>y</code>, representing coordinates of each part of the snake, and <code>food</code> includes the coordinates of food with same format. Here the number of food is always 1. </p>
+      <p>This means the <code>init</code> function should take the width and height as parameters, and return a function that takes an array of snake segments coordinates and an array of food coordinates as parameters and returns a direction. </p>
+      <p>The direction is represented by a integer number within 1 and 4. </p>
+      <pre><code>{
+  dx: !!(1 << dir & 4) - !!(1 << dir & 1),
+  dy: !!(1 << dir & 8) - !!(1 << dir & 2)
+}</code></pre>
+      <p>It means that: 1 -&gt; up; 2 -&gt; left; 3 -&gt; down; 4 -&gt; right. </p>
+      <p>You may print the object you get in each tick to help understanding the interface. </p>
       <hr>
       <a href="./../about.md">About</a> (Spoilers! )
     </div>
