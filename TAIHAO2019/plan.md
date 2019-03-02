@@ -123,12 +123,15 @@ https://www.dcode.fr/cryptarithm-solver
 #### Small Game 13
 Blaise
 Pascal
+RETRO BUT NOT BACKWARDS!!!
 #### Small Game 14
-
+IDN
 Crypto
+泰豪生日快乐
 #### Small Game 15
-ReverseEngineeringV.html
-https://9gag.com/gag/aKgj6M3?ref=tp
+ReverseEngineeringV
+Python
+Life is short, you need Python
 #### Small Game 16
 
 Forensic
@@ -144,9 +147,6 @@ ModerateDifficulty.html
 Design a problem that can stump Taihao for more than 30 minutes.
 
 HelloWorld...html
-reveals flag
-
-I should learn from crackme
 
 key: 1283
 

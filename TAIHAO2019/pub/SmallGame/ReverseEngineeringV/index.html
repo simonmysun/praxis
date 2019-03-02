@@ -6,16 +6,10 @@
     <link href="./../../assets/style.css" rel="stylesheet">
   </head>
   <body>
-    <p>Let's play some traditional puzzles. </p>
-    <p>In each equation, the decimal digits are represented by other characters. What are they? </p>
-    <ul>
-      <li>一+一+一+一+一=五</li>
-      <li>EINS+EINS+EINS+EINS=VIER</li>
-      <li>二十一 + 九十九 = 一百二十</li>
-      <li>EINS+EINS+EINS+EINS+EINS=FÜNF</li>
-      <li>ZWEI+VIER+VIER+VIERZIG+VIERZIG=NEUNZIG</li>
-    </ul>
-    <p><em>Att.</em> There are no leading zeroes in the numbers in the equations. There are no two characters representing a same digit in each equation. The answer is promised to be unique. The format of answer to submit is as '1+1=2,2+3=5' without quotes. </p>
+    <blockquote class="imgur-embed-pub" lang="en" data-id="a1G8u4L" data-context="false"><a href="//imgur.com/a1G8u4L"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+    <p><a href="main.pyc">main.pyc</a></p>
+    <p>Usage: </p>
+    <pre><code>python main.pyc</code></pre>
     <form onsubmit="return validate()">
       <input id="ans" type="text"><input type="submit">
     </form>
@@ -23,19 +17,19 @@
     <a href="./../../about.md">About</a> (Spoilers! )
     <script src="./../../assets/md5.js"></script>
     <script>
-      window.currentLevel = 12;
+      window.currentLevel = 14;
       function validate() {
           var ans = document.getElementById('ans').value;
-          if(md5(ans + '\n') === 'e6d4366d3e7d8b8578ec4e72cf582368') {
+          if(md5(ans + '\n') === '61f850887fa60e3bb2e8a24e4aa79d0f') {
               alert('Success. ');
-              goToNextLevel(md5(ans + 'TAIHAO2019\n'));
+              goToNextLevel(ans);
           } else {
               alert('Wrong password. ');
           }
           return false;
       }
       function goToNextLevel(password) {
-          var msg = atob('Jg8HDUJS');
+          var msg = atob('');
           var key = password.split('').map(x => x.charCodeAt(0));
           var res = [];
           for(var i = 0; i < msg.length; i += 1) {

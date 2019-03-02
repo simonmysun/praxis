@@ -1,5 +1,5 @@
-var password = 'dcfd17cc40c789165e00842a6940de94';
-var msg = 'Blaise';
+var password = 'e7690b98735fccbe4d173b1e37d70da0';
+var msg = 'ReverseEngineeringV';
 var key = password.split('').map(x => x.charCodeAt(0));
 var res = [];
 for(var i = 0; i < msg.length; i += 1) {
