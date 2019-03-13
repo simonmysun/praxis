@@ -1,0 +1,67 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{imakeidx}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\setlength{\parindent}{0em}
+
+\title{The Address of the Next Level}
+\author{Sun, Maoyin\cite{homepage}}
+\date{\today}
+
+\makeindex
+
+\begin{document}
+%\let\ref\autoref
+
+\maketitle
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Preface}
+\par It is about the address of the next level.
+
+\chapter*{Foreword}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Foreword}
+\par Nobody has written a foreword for this.
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{\protect\numberline{}Table of Contents}
+
+\chapter{First Chapter}
+\par The address of next level is in the third chapter.
+
+\chapter{Second Chapter}
+\par The address\index{Address} of next level is:
+\begin{lstlisting}
+.../pub/ReverseEngineeringAgain/
+\end{lstlisting}
+
+\chapter{Third Chapter}
+\par In Figure \ref{fig:tudou1} you can find Tudou\index{Tudou}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{large.jpeg}
+    \caption{Tudou in Heusenstamm}
+    \label{fig:tudou1}
+\end{figure}
+
+\chapter*{Appendix}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Appendix}
+None.
+
+\addcontentsline{toc}{chapter}{\protect\numberline{}List of Figures}
+\listoffigures
+
+\addcontentsline{toc}{chapter}{\protect\numberline{}Index}
+\index{Recursion}
+\printindex
+
+\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
+\begin{thebibliography}{9}
+\bibitem{homepage}
+Home page of Maoyin Sun,
+\\\texttt{https://i.makelove.expert}
+\end{thebibliography}
+
+\end{document}
