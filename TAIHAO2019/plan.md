@@ -133,8 +133,9 @@ ReverseEngineeringV
 Python
 Life is short, you need Python
 #### Small Game 16
+$ ./e 05022000
+No.1: 55363634~55363641
 
-Forensic
 #### Small Game 17
 ReverseEngineeringLiu.html
 

@@ -1,5 +1,5 @@
-var password = 'e7690b98735fccbe4d173b1e37d70da0';
-var msg = 'ReverseEngineeringV';
+var password = 'Life is short, you need Python';
+var msg = 'EulerscheZahl';
 var key = password.split('').map(x => x.charCodeAt(0));
 var res = [];
 for(var i = 0; i < msg.length; i += 1) {

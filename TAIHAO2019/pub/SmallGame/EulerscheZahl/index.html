@@ -6,10 +6,9 @@
     <link href="./../../assets/style.css" rel="stylesheet">
   </head>
   <body>
-    <blockquote class="imgur-embed-pub" lang="en" data-id="a1G8u4L" data-context="false"><a href="//imgur.com/a1G8u4L"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-    <p><a href="main.pyc">main.pyc</a></p>
-    <p>Usage: </p>
-    <pre><code>python main.pyc</code></pre>
+    <p>We all know about $e$, the base of the natural logarithm. It can be calculated as $$e = \sum\limits_{n = 0}^{ \infty} \dfrac{1}{n!} = \frac{1}{1} + \frac{1}{1} + \frac{1}{1\cdot 2} + \frac{1}{1\cdot 2\cdot 3} + \cdots$$</p>
+    <p>Theoretically, you can find any sequence of numbers continuously presented in the decimal form of $e$. Do you know where '05022000' first appears? </p>
+    <p>The answer should be the position where the first appearance starts from, in decimal form of its fractional part. e.g. '1828' appears at position 2 for the first time(additionally it appears at 6 for the second time), the answer to 1828 is '2'(without quote)</p>
     <form onsubmit="return validate()">
       <input id="ans" type="text"><input type="submit">
     </form>
@@ -17,7 +16,7 @@
     <a href="./../../about.md">About</a> (Spoilers! )
     <script src="./../../assets/md5.js"></script>
     <script>
-      window.currentLevel = 14;
+      window.currentLevel = 15;
       function validate() {
           var ans = document.getElementById('ans').value;
           if(md5(ans + '\n') === '61f850887fa60e3bb2e8a24e4aa79d0f') {

@@ -219,10 +219,7 @@ var routes = [
             editor.setTheme('ace/theme/monokai');
             editor.session.setMode('ace/mode/javascript');
             if(localStorage.aceRecover === undefined) {
-                localStorage.aceRecover = `function init(w, h) {
-                    return function(snake, food) {
-                    }
-                }`;
+                localStorage.aceRecover = `function init(w, h) {\n  return function(snake, food) {\n  }\n}`;
             }
             editor.session.setValue(localStorage.aceRecover);
             editor.session.on('change', function(delta) {
