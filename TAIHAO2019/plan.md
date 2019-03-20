@@ -122,6 +122,7 @@ https://www.janko.at/Raetsel/Alphametics/index.htm
 https://www.dcode.fr/cryptarithm-solver
 #### Small Game 13
 Blaise
+aka ReverseEngineering4
 Pascal
 RETRO BUT NOT BACKWARDS!!!
 #### Small Game 14
