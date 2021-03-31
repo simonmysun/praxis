@@ -1,32 +1,38 @@
 ;$(document).ready(function(){
+  $.ajax({
+    url: 'data/dat.txt'  
+  }).done(function(data) {
+    db = data.split('\n').map(l => l.split(' '));
     $('#test-tests').hide('fast', function() {
-	$('#test-result').hide('fast', function() {
-	    $('#test-start').show('fast', function() {
-		$('#test-mask').fadeOut(500);
-	    });
+      $('#test-result').hide('fast', function() {
+	$('#test-start').show('fast', function() {
+	  $('#test-mask').fadeOut(500);
 	});
+      });
     });
     $('#start').click(function() {
-	startTest();
-    })
+      startTest();
+    });
     $('#po').click(function() {
-	check(true);
-    })
+      check(true);
+    });
     $('#ne').click(function() {
-	check(false);
-    })
+      check(false);
+    });
     $('#share').click(function() {
-	
-    })
+      
+    });
     $('#restart').click(function() {
-	startTest();
-    })
+      startTest();
+    });
+  });
 });
 
 var pos;
 var step;
 var depth;
 var wander;
+var db;
 
 function startTest() {
     pos = 3000 + Math.floor(Math.random() * 500);
@@ -49,16 +55,12 @@ function startTest() {
 }
 
 function getQuestion(pos, callback) {
-    $('#test-mask').fadeIn(150, function() {
-	$.ajax({
-	    url: 'data/order/' + pos.toString() + '.json'
-	}).done(function(data) {
-	    $('#test-content').text(data.word);
-	    $('#test-mask').fadeOut(150, function() {
-	    });
-	    callback();
-	});
+  $('#test-mask').fadeIn(150, function() {
+    $('#test-content').text(db[pos][0]);
+    $('#test-mask').fadeOut(150, function() {
     });
+    callback();
+  });
 }
 
 function check(right) {
