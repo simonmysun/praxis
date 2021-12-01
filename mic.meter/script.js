@@ -32,7 +32,9 @@ micButton.supported = Tone.UserMedia.supported;
 micButton.addEventListener("open", () => mic.open());
 micButton.addEventListener("close", () => mic.close());
 
-const delay = new Tone.Delay(1).toDestination();
+let delayTime = 1;
+
+const delay = new Tone.Delay(delayTime).toDestination();
 let monitor = false;
 document.getElementById('monitor').addEventListener('click', (e) => {
   if(monitor) {
